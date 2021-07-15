@@ -1,17 +1,15 @@
-import Main from "components/Main";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Routes } from "navigation/routes";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "styles/global";
+import ResetStyles from "styles/reset";
+import theme from 'styles/theme'
 
 export function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/about">
-          <Main description="This is the About Page" />
-        </Route>
-      </Switch>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <ResetStyles />
+      <GlobalStyles />
+      <Routes />
+    </ThemeProvider>
   );
 }
