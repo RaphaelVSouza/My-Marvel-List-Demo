@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CharacterCard /> should render the character card 1`] = `
+<article
+  class="sc-bdnxRM hGpXIA"
+>
+  <img
+    alt="Iron Man"
+    src="http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/portrait_fantastic.jpg"
+  />
+  <div
+    class="sc-gtsrHT jHJDAW"
+  >
+    <div
+      class="sc-dlnjwi hJtaiz"
+    >
+      Iron Man
+    </div>
+    <div
+      class="sc-hKFxyN guThvP"
+    >
+      No description found.
+    </div>
+  </div>
+</article>
+`;
