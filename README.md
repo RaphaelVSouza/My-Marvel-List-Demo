@@ -60,6 +60,7 @@ Other commands like `generating components` and test are listed below:
 - `storybook`: runs storybook on `localhost:6006`
 - `build-storybook`: create the build version of storybook
 
+## This project is development, for now access the http://localhost:3000/characters route
 ## Learn More
 
 To learn more about the structure and other commands/modifications, see the [Create React App Documentation](https://create-react-app.dev/).
