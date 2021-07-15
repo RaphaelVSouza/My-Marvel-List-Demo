@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loading /> should render the loading 1`] = `
+<div
+  class="sc-bdnxRM bSTVpm"
+>
+  <img
+    alt="a circle spinning representing a loading"
+    class="sc-gtsrHT dLZMpi"
+    src="/loading-icon.svg"
+  />
+</div>
+`;
