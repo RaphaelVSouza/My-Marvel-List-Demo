@@ -1,7 +1,6 @@
 {
   "name": "my-marvel-list",
   "version": "0.1.0",
-  "private": true,
   "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -57,17 +56,55 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [
+      "prettier"
     ],
     "overrides": [
       {
         "files": [
-          "**/stories.*"
+          "**/stories.*",
+          "**/*.[jt]s?(x)"
         ],
         "rules": {
-          "import/no-anonymous-default-export": "off"
+          "import/no-anonymous-default-export": "off",
+          "react/jsx-filename-extension": [
+            1,
+            {
+              "extensions": [
+                ".js",
+                ".jsx",
+                ".ts",
+                ".tsx"
+              ]
+            }
+          ],
+          "prettier/prettier": [
+            "error",
+            {
+              "semi": false,
+              "singleQuote": true
+            }
+          ]
+        },
+        "settings": {
+          "import/resolver": {
+            "typescript": {}
+          }
         }
       }
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
     ]
   },
   "browserslist": {
@@ -90,7 +127,13 @@
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.3.0",
     "@types/axios": "^0.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
     "plop": "^2.7.4",
+    "prettier": "^2.3.2",
     "storybook-react-router": "^1.0.8"
   }
 }

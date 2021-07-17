@@ -19,5 +19,5 @@ export const Wrapper = styled.div`
 `
 
 export const LoadingIcon = styled.img`
-   animation: ${rotate} 2s linear infinite;
+  animation: ${rotate} 2s linear infinite;
 `

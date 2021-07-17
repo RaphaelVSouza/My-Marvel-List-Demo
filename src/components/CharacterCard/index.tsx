@@ -1,5 +1,5 @@
-import * as S from './styles'
 import { apiImageTypes } from 'utils/apiImageTypes'
+import * as S from './styles'
 
 type CharacterCardProps = {
   id: string
@@ -15,21 +15,16 @@ const CharacterCard = ({
   id,
   name,
   description,
-  thumbnail
+  thumbnail,
 }: CharacterCardProps) => (
-
   <S.Wrapper>
     <img
-      src=
-      {`${thumbnail.path}/${apiImageTypes.portrait.fantastic}.${thumbnail.extension}`}
+      src={`${thumbnail.path}/${apiImageTypes.portrait.fantastic}.${thumbnail.extension}`}
       alt={/image_not_available/.test(thumbnail.path) ? 'not finded' : name}
     />
     <S.Details>
       <S.Name>{name}</S.Name>
-      <S.Description>{description
-        ? description
-        : "No description found."}
-      </S.Description>
+      <S.Description>{description || 'No description found.'}</S.Description>
     </S.Details>
   </S.Wrapper>
 )

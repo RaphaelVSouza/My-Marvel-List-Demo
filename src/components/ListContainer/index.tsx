@@ -1,4 +1,4 @@
-import Media from "styled-media-query";
+import Media from 'styled-media-query'
 
 import styled, { css } from 'styled-components'
 
@@ -8,13 +8,13 @@ export const ListContainer = styled.div`
     flex-direction: column;
     margin-top: ${theme.spacings.xlarge};
 
-    ${Media.between("medium", "large")`
+    ${Media.between('medium', 'large')`
       display: grid;
       grid-template-columns: 1fr 1fr;
 
     `}
 
-    ${Media.greaterThan("large")`
+    ${Media.greaterThan('large')`
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
 

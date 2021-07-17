@@ -1,29 +1,27 @@
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.ul`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: ${theme.spacings.small};
+    li ~ li {
+      margin-left: ${theme.spacings.xxsmall};
+    }
 
-${({ theme }) => css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: ${theme.spacings.small};
-  li ~ li {
-    margin-left: ${theme.spacings.xxsmall};
-  }
+    li + button {
+      margin-left: ${theme.spacings.xxsmall};
+    }
 
-  li + button {
-    margin-left: ${theme.spacings.xxsmall};
-  }
+    button + li {
+      margin-left: ${theme.spacings.xxsmall};
+    }
 
-  button + li {
-    margin-left: ${theme.spacings.xxsmall};
-  }
-
-  button + button {
-    margin-left: ${theme.spacings.xxsmall};
-  }
+    button + button {
+      margin-left: ${theme.spacings.xxsmall};
+    }
   `}
-
 `
 
 export const Arrow = styled.button`
@@ -65,8 +63,5 @@ export const Index = styled.button<IndexProps>`
     &:hover {
       opacity: 0.6;
     }
-
   `}
-
-
 `

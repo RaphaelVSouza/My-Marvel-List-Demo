@@ -1,5 +1,5 @@
-import { ListCharacters } from "pages/ListCharacters";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ListCharacters } from 'pages/ListCharacters'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 export function Routes() {
   return (
@@ -10,5 +10,5 @@ export function Routes() {
         </Route>
       </Switch>
     </Router>
-  );
+  )
 }

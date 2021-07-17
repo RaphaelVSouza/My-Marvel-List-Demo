@@ -7,6 +7,5 @@ describe('<ListContainer />', () => {
     const { container } = renderWithTheme(<ListContainer />)
 
     expect(container).toBeInTheDocument()
-
   })
 })

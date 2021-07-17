@@ -11,7 +11,11 @@ export type ButtonProps = {
   fullWidthOnMobile?: boolean
 } & ButtonTypes
 
-const Button = ({ children, size = 'medium', fullWidthOnMobile = false }: ButtonProps) => (
+const Button = ({
+  children,
+  size = 'medium',
+  fullWidthOnMobile = false,
+}: ButtonProps) => (
   <S.Wrapper size={size} fullWidthOnMobile={fullWidthOnMobile}>
     {!!children && <span>{children}</span>}
   </S.Wrapper>

@@ -18,7 +18,7 @@ export default {
       large: '2.6rem',
       xlarge: '3.4rem',
       xxlarge: '5.2rem',
-    }
+    },
   },
   colors: {
     primary: '#e50914',
@@ -44,7 +44,5 @@ export default {
   media: {
     desktop: '(min-width: 1100px)',
     mobile: '(max-width: 1099px)',
-  }
+  },
 } as const
-
-

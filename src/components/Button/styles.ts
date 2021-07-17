@@ -8,7 +8,6 @@ const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     height: 3rem;
     font-size: ${theme.font.sizes.xsmall};
-
   `,
   medium: (theme: DefaultTheme) => css`
     height: 4rem;
@@ -21,11 +20,10 @@ const wrapperModifiers = {
     padding: ${theme.spacings.xxsmall} ${theme.spacings.xlarge};
   `,
   fullWidthOnMobile: () => css`
-
-    ${Media.lessThan("medium")`
+    ${Media.lessThan('medium')`
       width: 100%;
     `}
-  `
+  `,
 }
 
 export const Wrapper = styled.button<WrapperProps>`

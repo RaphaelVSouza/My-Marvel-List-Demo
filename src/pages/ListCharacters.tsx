@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
-import { Formik, Form, FormikHelpers } from 'formik';
-import qs from 'qs';
-import { apiMarvel } from "services/apiMarvel"
-import CharacterCard from "components/CharacterCard";
-import marvelKeys from "services/config/marvelKeys";
-import { Container } from "components/Container";
-import { ListContainer } from "components/ListContainer";
-import TextField from "components/TextField";
-import Button from "components/Button"
-import Pagination from "components/Pagination";
-import Loading from "components/Loading";
+import { Formik, Form, FormikHelpers } from 'formik'
+import qs from 'qs'
+import { apiMarvel } from 'services/apiMarvel'
+import CharacterCard from 'components/CharacterCard'
+import marvelKeys from 'services/config/marvelKeys'
+import { Container } from 'components/Container'
+import { ListContainer } from 'components/ListContainer'
+import TextField from 'components/TextField'
+import Button from 'components/Button'
+import Pagination from 'components/Pagination'
+import Loading from 'components/Loading'
 
 type SearchProps = {
   searchContent: string
@@ -22,24 +22,30 @@ export function ListCharacters() {
   const [isLoading, setIsLoading] = useState('loading')
   const [offset, setOffset] = useState(0)
 
-  let { search } = qs.parse(useLocation().search, { ignoreQueryPrefix: true })
+  const { search } = qs.parse(useLocation().search, { ignoreQueryPrefix: true })
   const history = useHistory()
 
-  const searchQuery = search ? { nameStartsWith: search } : '';
-  const LIMIT = 9;
+  const searchQuery = search ? { nameStartsWith: search } : ''
+  const LIMIT = 9
 
   const pagination = { limit: LIMIT, offset }
 
   useEffect(() => {
     if (isLoading === 'loading') {
-      apiMarvel.get("/characters?" + qs.stringify({ ...pagination, ...searchQuery, ...marvelKeys }))
-        .then(response => {
+      apiMarvel
+        .get(
+          `/characters?${qs.stringify({
+            ...pagination,
+            ...searchQuery,
+            ...marvelKeys,
+          })}`
+        )
+        .then((response) => {
           setTotalCharacters(response.data.data.total)
           setCharacters(response.data.data.results)
           setIsLoading('ready')
-
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error)
 
           alert('An error ocurred, try again later.')
@@ -54,23 +60,23 @@ export function ListCharacters() {
     setIsLoading('loading')
   }, [offset])
 
-
   function handleSearch(
     values: SearchProps,
     { setSubmitting }: FormikHelpers<SearchProps>
   ) {
-
     history.push({
-      search: `?${qs.stringify({ search: values.searchContent }, { format: 'RFC1738' })}`
+      search: `?${qs.stringify(
+        { search: values.searchContent },
+        { format: 'RFC1738' }
+      )}`,
     })
 
     if (offset === 0) setIsLoading('loading')
 
     setOffset(0)
 
-    setSubmitting(false);
+    setSubmitting(false)
   }
-
 
   return (
     <Container>
@@ -78,33 +84,37 @@ export function ListCharacters() {
         initialValues={{
           searchContent: '',
         }}
-
-        onSubmit={handleSearch}>
+        onSubmit={handleSearch}
+      >
         <Form>
-          <TextField label="Enter with the character name:" name="searchContent" />
-          <Button children="Search" fullWidthOnMobile={true} type="submit" />
+          <TextField
+            label="Enter with the character name:"
+            name="searchContent"
+          />
+          <Button children="Search" fullWidthOnMobile type="submit" />
         </Form>
       </Formik>
       {isLoading === 'loading' && <Loading />}
       <ListContainer>
-        {isLoading === 'ready' && characters.map(({ id, name, description, thumbnail }) => {
-          return (<CharacterCard
-            key={id}
-            id={id}
-            name={name}
-            description={description}
-            thumbnail={thumbnail}
-          />)
-        })}
+        {isLoading === 'ready' &&
+          characters.map(({ id, name, description, thumbnail }) => (
+            <CharacterCard
+              key={id}
+              id={id}
+              name={name}
+              description={description}
+              thumbnail={thumbnail}
+            />
+          ))}
       </ListContainer>
-      {isLoading === 'ready' &&
+      {isLoading === 'ready' && (
         <Pagination
           limit={LIMIT}
           total={totalCharacters}
           offset={offset}
           setOffset={setOffset}
-        />}
+        />
+      )}
     </Container>
   )
-
 }

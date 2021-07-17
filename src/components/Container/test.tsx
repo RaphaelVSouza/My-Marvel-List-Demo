@@ -7,6 +7,5 @@ describe('<Container />', () => {
     const { container } = renderWithTheme(<Container />)
 
     expect(container).toBeInTheDocument()
-
   })
 })

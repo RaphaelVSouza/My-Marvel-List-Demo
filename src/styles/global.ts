@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import theme from "./theme";
+import { createGlobalStyle } from 'styled-components'
+import theme from './theme'
 
 const GlobalStyles = createGlobalStyle`
     * {
@@ -16,6 +16,6 @@ const GlobalStyles = createGlobalStyle`
       color: #FFFFFF;
     }
 
-`;
+`
 
-export default GlobalStyles;
+export default GlobalStyles
