@@ -1,35 +1,40 @@
 import * as S from './styles'
+import {
+  PAGINATION_MAX_ITEMS as MAX_ITEMS,
+  PAGINATION_MAX_LEFT as MAX_LEFT,
+} from 'constants'
 
 export type PaginationProps = {
   limit: number
   total: number
-  offset: number
-  setOffset: (offset: number) => void
+  currentPage: number
+  setCurrentPage: (currentPage: number) => void
 }
 
-const MAX_ITEMS = 5
-const MAX_LEFT = (MAX_ITEMS - 1) / 2
-
-const Pagination = ({ limit, total, offset, setOffset }: PaginationProps) => {
-  const current = offset ? offset / limit + 1 : 1
+const Pagination = ({
+  limit,
+  total,
+  currentPage,
+  setCurrentPage,
+}: PaginationProps) => {
   const pages = Math.ceil(total / limit)
+  const first = Math.max(currentPage - MAX_LEFT, 1)
 
-  const first = Math.max(current - MAX_LEFT, 1)
-  const firstPage = 0
-  const penultimatePage = pages * limit - limit * 2
-  const finalPage = pages * limit - limit * 1
+  const isFirstPage = currentPage === 1
+  const isLastPage = currentPage === pages
+  const penultimatePage = pages - 1
 
   let visibleItems: number
 
   if (pages < MAX_ITEMS) {
     visibleItems = pages
   } else {
-    switch (offset) {
+    switch (currentPage) {
       case penultimatePage:
         visibleItems = MAX_ITEMS - 1
         break
 
-      case finalPage:
+      case pages:
         visibleItems = MAX_ITEMS - 2
         break
 
@@ -41,11 +46,18 @@ const Pagination = ({ limit, total, offset, setOffset }: PaginationProps) => {
 
   return (
     <S.Wrapper>
-      {offset !== firstPage && (
-        <S.Arrow onClick={() => setOffset(0)}>&lt;&lt;</S.Arrow>
+      {!isFirstPage && (
+        <S.Arrow id="arrow-initial" onClick={() => setCurrentPage(1)}>
+          &lt;&lt;
+        </S.Arrow>
       )}
-      {offset !== firstPage && (
-        <S.Arrow onClick={() => setOffset(offset - limit)}>&lt;</S.Arrow>
+      {!isFirstPage && (
+        <S.Arrow
+          id="arrow-previous"
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
+          &lt;
+        </S.Arrow>
       )}
 
       {Array.from({ length: visibleItems })
@@ -53,19 +65,26 @@ const Pagination = ({ limit, total, offset, setOffset }: PaginationProps) => {
         .map((page, index) => (
           <li key={index}>
             <S.Index
-              onClick={() => setOffset((page - 1) * limit)}
-              isActive={current === page}
+              onClick={() => setCurrentPage(page)}
+              isActive={currentPage === page}
             >
               {page}
             </S.Index>
           </li>
         ))}
 
-      {offset !== finalPage && (
-        <S.Arrow onClick={() => setOffset(offset + limit)}>&gt;</S.Arrow>
+      {!isLastPage && (
+        <S.Arrow
+          id="arrow-next"
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          &gt;
+        </S.Arrow>
       )}
-      {offset !== finalPage && (
-        <S.Arrow onClick={() => setOffset(finalPage)}>&gt;&gt;</S.Arrow>
+      {!isLastPage && (
+        <S.Arrow id="arrow-final" onClick={() => setCurrentPage(pages)}>
+          &gt;&gt;
+        </S.Arrow>
       )}
     </S.Wrapper>
   )

@@ -1,8 +1,10 @@
 import CryptoJS from 'crypto-js'
 
+import { MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY } from 'constants'
+
 const ts = new Date().getTime()
-const apikey = process.env.REACT_APP_MARVEL_PUBLIC_KEY as string
-const privateKey = process.env.REACT_APP_MARVEL_PRIVATE_KEY as string
+const apikey = MARVEL_PUBLIC_KEY
+const privateKey = MARVEL_PRIVATE_KEY
 
 if (!apikey || !privateKey) throw Error('Missing marvel keys')
 

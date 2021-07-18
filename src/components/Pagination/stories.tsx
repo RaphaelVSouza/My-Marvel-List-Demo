@@ -7,5 +7,5 @@ export default {
 } as Meta
 
 export const Default: Story = () => (
-  <Pagination limit={20} total={60} offset={0} setOffset={() => ''} />
+  <Pagination limit={20} total={60} currentPage={0} setCurrentPage={() => ''} />
 )

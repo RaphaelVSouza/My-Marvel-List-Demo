@@ -12,6 +12,8 @@ import Button from 'components/Button'
 import Pagination from 'components/Pagination'
 import Loading from 'components/Loading'
 
+import { PAGINATION_LIMIT as limit } from 'constants'
+
 type SearchProps = {
   searchContent: string
 }
@@ -20,15 +22,18 @@ export function ListCharacters() {
   const [totalCharacters, setTotalCharacters] = useState(0)
   const [characters, setCharacters] = useState([])
   const [isLoading, setIsLoading] = useState('loading')
-  const [offset, setOffset] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const { search } = qs.parse(useLocation().search, { ignoreQueryPrefix: true })
+  const { search, page = 1 } = qs.parse(useLocation().search, {
+    ignoreQueryPrefix: true,
+  })
   const history = useHistory()
-
+  console.log(page)
   const searchQuery = search ? { nameStartsWith: search } : ''
-  const LIMIT = 9
-
-  const pagination = { limit: LIMIT, offset }
+  const pagination = {
+    limit,
+    offset: page === 1 ? 0 : +page * limit,
+  }
 
   useEffect(() => {
     if (isLoading === 'loading') {
@@ -40,9 +45,15 @@ export function ListCharacters() {
             ...marvelKeys,
           })}`
         )
-        .then((response) => {
-          setTotalCharacters(response.data.data.total)
-          setCharacters(response.data.data.results)
+        .then(({ data: response }) => {
+          setTotalCharacters(response.data.total)
+          setCharacters(response.data.results)
+          history.push({
+            search: `?${qs.stringify(
+              { search, page: page ? page : currentPage },
+              { format: 'RFC1738' }
+            )}`,
+          })
           setIsLoading('ready')
         })
         .catch((error) => {
@@ -58,7 +69,7 @@ export function ListCharacters() {
 
   useEffect(() => {
     setIsLoading('loading')
-  }, [offset])
+  }, [currentPage])
 
   function handleSearch(
     values: SearchProps,
@@ -66,14 +77,14 @@ export function ListCharacters() {
   ) {
     history.push({
       search: `?${qs.stringify(
-        { search: values.searchContent },
+        { search: values.searchContent, page: 1 },
         { format: 'RFC1738' }
       )}`,
     })
 
-    if (offset === 0) setIsLoading('loading')
+    if (currentPage === 1) setIsLoading('loading')
 
-    setOffset(0)
+    setCurrentPage(1)
 
     setSubmitting(false)
   }
@@ -109,10 +120,10 @@ export function ListCharacters() {
       </ListContainer>
       {isLoading === 'ready' && (
         <Pagination
-          limit={LIMIT}
+          limit={limit}
           total={totalCharacters}
-          offset={offset}
-          setOffset={setOffset}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
       )}
     </Container>
