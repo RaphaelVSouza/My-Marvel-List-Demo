@@ -41,8 +41,7 @@ export default {
     xlarge: '6.4rem',
     xxlarge: '12.8rem',
   },
-  media: {
-    desktop: '(min-width: 1100px)',
-    mobile: '(max-width: 1099px)',
+  indexes: {
+    modal: 10,
   },
 } as const
