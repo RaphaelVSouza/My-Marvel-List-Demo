@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
 
-import { MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY } from 'constants'
+import { MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY } from 'utils/constants'
 
 const ts = new Date().getTime()
 const apikey = MARVEL_PUBLIC_KEY
