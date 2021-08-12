@@ -2,7 +2,7 @@ import * as S from './styles'
 import {
   PAGINATION_MAX_ITEMS as MAX_ITEMS,
   PAGINATION_MAX_LEFT as MAX_LEFT,
-} from 'constants'
+} from 'utils/constants'
 
 export type PaginationProps = {
   limit: number
