@@ -12,7 +12,7 @@ import Button from 'components/Button'
 import Pagination from 'components/Pagination'
 import Loading from 'components/Loading'
 
-import { PAGINATION_LIMIT as limit } from 'constants'
+import { PAGINATION_LIMIT as limit } from 'utils/constants'
 
 type SearchProps = {
   searchContent: string
